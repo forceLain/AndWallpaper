@@ -1,0 +1,12 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <ListPreference
+        android:key="pref.link_mode"
+        android:title="@string/pref_title_link_mode"
+        android:defaultValue="battery"
+        android:entries="@array/pref_link_modes"
+        android:entryValues="@array/pref_link_modes_values"
+        android:negativeButtonText="@null"
+        android:positiveButtonText="@null" />
+
+</PreferenceScreen>

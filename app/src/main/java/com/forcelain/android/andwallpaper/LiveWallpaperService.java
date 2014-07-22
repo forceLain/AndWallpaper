@@ -4,8 +4,10 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.net.wifi.WifiManager;
 import android.os.BatteryManager;
+import android.preference.PreferenceManager;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.WindowManager;
@@ -93,21 +95,7 @@ public class LiveWallpaperService extends BaseLiveWallpaperService {
         scene.attachChild(vader);
         scene.attachChild(saber);
 
-        /*
-        scene.registerUpdateHandler(new TimerHandler(1, true, new ITimerCallback() {
-            @Override
-            public void onTimePassed(TimerHandler pTimerHandler) {
-                WifiManager wifiManager = (WifiManager)getSystemService(Context.WIFI_SERVICE);
-                int rssi = wifiManager.getConnectionInfo().getRssi();
-                int level = WifiManager.calculateSignalLevel(rssi, 10);
-                saberLevel = level/10.0f;
-                saber.setScale(saberLevel, 1f);
-            }
-        }));
-        */
-
         pOnCreateSceneCallback.onCreateSceneFinished(scene);
-
     }
 
     private void adjustScene() {
@@ -136,15 +124,25 @@ public class LiveWallpaperService extends BaseLiveWallpaperService {
     @Override
     public synchronized void onResumeGame() {
         super.onResumeGame();
-        //registerReceiver(batInfoReceiver, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
-        //registerReceiver(wifiReceiver, new IntentFilter(WifiManager.RSSI_CHANGED_ACTION));
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        String string = prefs.getString(SettingsActivity.LINK_MODE, "battery");
+        if ("battery".equals(string)){
+            registerReceiver(batInfoReceiver, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+        } else {
+            registerReceiver(wifiReceiver, new IntentFilter(WifiManager.RSSI_CHANGED_ACTION));
+        }
     }
 
     @Override
     public void onPauseGame() {
         super.onPauseGame();
-        //unregisterReceiver(batInfoReceiver);
-        //unregisterReceiver(wifiReceiver);
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        String string = prefs.getString(SettingsActivity.LINK_MODE, "battery");
+        if ("battery".equals(string)){
+            unregisterReceiver(batInfoReceiver);
+        } else {
+            unregisterReceiver(wifiReceiver);
+        }
     }
 
     private BroadcastReceiver batInfoReceiver = new BroadcastReceiver(){
@@ -158,7 +156,11 @@ public class LiveWallpaperService extends BaseLiveWallpaperService {
     private BroadcastReceiver wifiReceiver = new BroadcastReceiver(){
         @Override
         public void onReceive(Context ctxt, Intent intent) {
-            Log.d("@@@@", "wifi");
+            WifiManager wifiManager = (WifiManager)getSystemService(Context.WIFI_SERVICE);
+            int rssi = wifiManager.getConnectionInfo().getRssi();
+            int level = WifiManager.calculateSignalLevel(rssi, 10);
+            saberLevel = level/10.0f;
+            saber.setScale(saberLevel, 1f);
         }
     };
 }

@@ -1,0 +1,16 @@
+<resources>
+        <string name="title_activity_settings">Settings</string>
+
+
+    <string name="pref_header_general">General</string>
+
+    <string name="pref_title_link_mode">Link the lightsaber with:</string>
+    <string-array name="pref_link_modes">
+        <item>Battery</item>
+        <item>WiFi Signal</item>
+    </string-array>
+    <string-array name="pref_link_modes_values">
+        <item>battery</item>
+        <item>wifi</item>
+    </string-array>
+</resources>
