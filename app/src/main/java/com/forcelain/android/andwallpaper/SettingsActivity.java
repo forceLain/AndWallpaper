@@ -17,6 +17,7 @@ import java.util.List;
 public class SettingsActivity extends PreferenceActivity {
 
     public static final String LINK_MODE = "pref.link_mode";
+    public static final String BLINK = "pref.blink";
 
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
@@ -30,6 +31,7 @@ public class SettingsActivity extends PreferenceActivity {
         }
         addPreferencesFromResource(R.xml.pref_general);
         bindPreferenceSummaryToValue(findPreference(LINK_MODE));
+        bindPreferenceSummaryToValue(findPreference(BLINK));
     }
 
     @Override

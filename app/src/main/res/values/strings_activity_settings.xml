@@ -13,4 +13,17 @@
         <item>battery</item>
         <item>wifi</item>
     </string-array>
+
+    <string-array name="pref_blink">
+        <item>Disable</item>
+        <item>Slow</item>
+        <item>Medium</item>
+        <item>Fast</item>
+    </string-array>
+    <string-array name="pref_blink_values">
+        <item>disable</item>
+        <item>slow</item>
+        <item>medium</item>
+        <item>fast</item>
+    </string-array>
 </resources>

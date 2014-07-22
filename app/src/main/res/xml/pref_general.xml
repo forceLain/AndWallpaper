@@ -9,4 +9,13 @@
         android:negativeButtonText="@null"
         android:positiveButtonText="@null" />
 
+    <ListPreference
+        android:key="pref.blink"
+        android:title="Flickering lightsaber"
+        android:defaultValue="slow"
+        android:entries="@array/pref_blink"
+        android:entryValues="@array/pref_blink_values"
+        android:negativeButtonText="@null"
+        android:positiveButtonText="@null" />
+
 </PreferenceScreen>
