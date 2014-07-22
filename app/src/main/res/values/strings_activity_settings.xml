@@ -8,10 +8,12 @@
     <string-array name="pref_link_modes">
         <item>Battery</item>
         <item>WiFi Signal</item>
+        <item>Disabled</item>
     </string-array>
     <string-array name="pref_link_modes_values">
         <item>battery</item>
         <item>wifi</item>
+        <item>disabled</item>
     </string-array>
 
     <string-array name="pref_blink">

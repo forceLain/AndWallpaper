@@ -183,8 +183,11 @@ public class LiveWallpaperService extends BaseLiveWallpaperService {
         String linkTo = prefs.getString(SettingsActivity.LINK_MODE, "battery");
         if ("battery".equals(linkTo)){
             registerReceiver(batInfoReceiver, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
-        } else {
+        } else if ("wifi".equals(linkTo)) {
             registerReceiver(wifiReceiver, new IntentFilter(WifiManager.RSSI_CHANGED_ACTION));
+        } else {
+            saberLevel = 1;
+            saber.setScale(saberLevel, 1);
         }
 
         String blink = prefs.getString(SettingsActivity.BLINK, "slow");
@@ -196,6 +199,7 @@ public class LiveWallpaperService extends BaseLiveWallpaperService {
             setBlink(BLINK_DURATION_FAST);
         } else {
             saber.clearEntityModifiers();
+            saber.setAlpha(1);
         }
     }
 
@@ -203,10 +207,10 @@ public class LiveWallpaperService extends BaseLiveWallpaperService {
     public void onPauseGame() {
         super.onPauseGame();
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        String string = prefs.getString(SettingsActivity.LINK_MODE, "battery");
-        if ("battery".equals(string)){
+        String linkTo = prefs.getString(SettingsActivity.LINK_MODE, "battery");
+        if ("battery".equals(linkTo)){
             unregisterReceiver(batInfoReceiver);
-        } else {
+        } else if ("wifi".equals(linkTo)){
             unregisterReceiver(wifiReceiver);
         }
     }
