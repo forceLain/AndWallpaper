@@ -1,4 +1,37 @@
 <resources>
-    <string name="app_name">AndWallpaper</string>
-    <string name="wallpaper_description">wallpaper_description</string>
+    <string name="app_name">Darth Vader Live Wallpaper</string>
+    <string name="wallpaper_description">Darth Vader Live Wallpaper</string>
+    <string name="pref_blink_title">Flickering lightsaber</string>
+    <string name="smoke_disabled">Smoke is disabled</string>
+    <string name="smoke_enabled">Smoke is enabled</string>
+    <string name="pref_show_smoke_title">Show smoke</string>
+    <string name="title_activity_settings">Settings</string>
+
+
+    <string name="pref_header_general">General</string>
+
+    <string name="pref_title_link_mode">Link the lightsaber with:</string>
+    <string-array name="pref_link_modes">
+        <item>Battery</item>
+        <item>WiFi Signal</item>
+        <item>Disabled</item>
+    </string-array>
+    <string-array name="pref_link_modes_values">
+        <item>battery</item>
+        <item>wifi</item>
+        <item>disabled</item>
+    </string-array>
+
+    <string-array name="pref_blink">
+        <item>Disable</item>
+        <item>Slow</item>
+        <item>Medium</item>
+        <item>Fast</item>
+    </string-array>
+    <string-array name="pref_blink_values">
+        <item>disable</item>
+        <item>slow</item>
+        <item>medium</item>
+        <item>fast</item>
+    </string-array>
 </resources>

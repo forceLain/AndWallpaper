@@ -1,0 +1,37 @@
+<resources>
+    <string name="app_name">Darth Vader Live Wallpaper</string>
+    <string name="wallpaper_description">Darth Vader Live Wallpaper</string>
+    <string name="pref_blink_title">Мерцающий световой меч</string>
+    <string name="smoke_disabled">Дым отключен</string>
+    <string name="smoke_enabled">Дым включен</string>
+    <string name="pref_show_smoke_title">Показывать дым</string>
+    <string name="title_activity_settings">Настройки</string>
+
+
+    <string name="pref_header_general">Основные</string>
+
+    <string name="pref_title_link_mode">Связать световой меч:</string>
+    <string-array name="pref_link_modes">
+        <item>Заряд батареи</item>
+        <item>WiFi сигнал</item>
+        <item>Не связывать</item>
+    </string-array>
+    <string-array name="pref_link_modes_values">
+        <item>battery</item>
+        <item>wifi</item>
+        <item>disabled</item>
+    </string-array>
+
+    <string-array name="pref_blink">
+        <item>Не мерцать</item>
+        <item>Редко</item>
+        <item>Средне</item>
+        <item>Часто</item>
+    </string-array>
+    <string-array name="pref_blink_values">
+        <item>disable</item>
+        <item>slow</item>
+        <item>medium</item>
+        <item>fast</item>
+    </string-array>
+</resources>

@@ -18,6 +18,7 @@ public class SettingsActivity extends PreferenceActivity {
 
     public static final String LINK_MODE = "pref.link_mode";
     public static final String BLINK = "pref.blink";
+    public static final String SMOKE = "pref.smoke";
 
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
@@ -100,6 +101,7 @@ public class SettingsActivity extends PreferenceActivity {
             super.onCreate(savedInstanceState);
             addPreferencesFromResource(R.xml.pref_general);
             bindPreferenceSummaryToValue(findPreference(LINK_MODE));
+            bindPreferenceSummaryToValue(findPreference(BLINK));
         }
     }
 }

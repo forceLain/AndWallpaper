@@ -43,6 +43,7 @@ import org.andengine.entity.particle.modifier.BaseSingleValueSpanParticleModifie
 import org.andengine.entity.particle.modifier.ColorParticleModifier;
 import org.andengine.entity.particle.modifier.ExpireParticleInitializer;
 import org.andengine.entity.particle.modifier.ScaleParticleModifier;
+import org.andengine.entity.primitive.Line;
 import org.andengine.entity.scene.Scene;
 import org.andengine.entity.scene.background.Background;
 import org.andengine.entity.sprite.Sprite;
@@ -82,6 +83,7 @@ public class LiveWallpaperService extends BaseLiveWallpaperService {
     private Sprite saber;
     private float saberLevel = 1;
     private ParticleSystem particleSystem;
+    private float factor = 1;
 
     @Override
     public EngineOptions onCreateEngineOptions() {
@@ -148,17 +150,18 @@ public class LiveWallpaperService extends BaseLiveWallpaperService {
 
     private void adjustScene() {
         float minSize = Math.min(CAMERA_HEIGHT, CAMERA_WIDTH);
-        float vaderSize = minSize / 1.5f;
-        float factor = 1024 / vaderSize;
+        float vaderSize = minSize / 2f;
+        factor = 1024 / vaderSize;
         vader.setHeight(vaderSize);
         vader.setWidth(vaderSize);
         vader.setPosition(CAMERA_WIDTH / 2 - vaderSize / 2, CAMERA_HEIGHT / 2 - vaderSize / 2);
         float saberOffsetX = 234 / factor;
         float saberOffsetY = 60 / factor;
 
-        float smokeOffsetX = 170 / factor;
-        float smokeOffsetY = -20 / factor;
+        float smokeOffsetX = (208) / factor - 16;
+        float smokeOffsetY = (8) / factor - 16;
 
+        particleSystem.reset();
         PointParticleEmitter particleEmitter = (PointParticleEmitter) particleSystem.getParticleEmitter();
         particleEmitter.setCenter(CAMERA_WIDTH/2 + smokeOffsetX, CAMERA_HEIGHT/2 + smokeOffsetY);
 
@@ -187,7 +190,7 @@ public class LiveWallpaperService extends BaseLiveWallpaperService {
             registerReceiver(wifiReceiver, new IntentFilter(WifiManager.RSSI_CHANGED_ACTION));
         } else {
             saberLevel = 1;
-            saber.setScale(saberLevel, 1);
+            saber.setScale(saberLevel / factor, 1 / factor);
         }
 
         String blink = prefs.getString(SettingsActivity.BLINK, "slow");
@@ -201,6 +204,9 @@ public class LiveWallpaperService extends BaseLiveWallpaperService {
             saber.clearEntityModifiers();
             saber.setAlpha(1);
         }
+
+        boolean showSmoke = prefs.getBoolean(SettingsActivity.SMOKE, true);
+        particleSystem.setParticlesSpawnEnabled(showSmoke);
     }
 
     @Override
@@ -230,7 +236,7 @@ public class LiveWallpaperService extends BaseLiveWallpaperService {
         @Override
         public void onReceive(Context ctxt, Intent intent) {
             saberLevel = intent.getIntExtra(BatteryManager.EXTRA_LEVEL, 0) / (float)100;
-            saber.setScale(saberLevel, 1f);
+            saber.setScale(saberLevel/factor, 1f/factor);
         }
     };
 
@@ -241,7 +247,7 @@ public class LiveWallpaperService extends BaseLiveWallpaperService {
             int rssi = wifiManager.getConnectionInfo().getRssi();
             int level = WifiManager.calculateSignalLevel(rssi, 10);
             saberLevel = level/10.0f;
-            saber.setScale(saberLevel, 1f);
+            saber.setScale(saberLevel/factor, 1f/factor);
         }
     };
 
@@ -255,7 +261,6 @@ public class LiveWallpaperService extends BaseLiveWallpaperService {
 
             PointParticleEmitter pointParticleEmitter = new PointParticleEmitter(0, 0);
             SpriteParticleSystem particleSystem = new SpriteParticleSystem (pointParticleEmitter, RATE_MIN, RATE_MAX, PARTICLES_MAX, particleTextureRegion, getVertexBufferObjectManager());
-
             particleSystem.addParticleInitializer(new ColorParticleInitializer<Sprite>(0.3f, 0.3f, 0.3f));
             particleSystem.addParticleInitializer(new AlphaParticleInitializer<Sprite>(0));
             particleSystem.addParticleInitializer(new ScaleParticleInitializer<Sprite>(0.1f));

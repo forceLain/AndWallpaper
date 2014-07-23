@@ -11,11 +11,18 @@
 
     <ListPreference
         android:key="pref.blink"
-        android:title="Flickering lightsaber"
+        android:title="@string/pref_blink_title"
         android:defaultValue="slow"
         android:entries="@array/pref_blink"
         android:entryValues="@array/pref_blink_values"
         android:negativeButtonText="@null"
         android:positiveButtonText="@null" />
+
+    <CheckBoxPreference
+        android:key="pref.smoke"
+        android:defaultValue="true"
+        android:summaryOff="@string/smoke_disabled"
+        android:summaryOn="@string/smoke_enabled"
+        android:title="@string/pref_show_smoke_title"/>
 
 </PreferenceScreen>
