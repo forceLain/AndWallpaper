@@ -56,7 +56,7 @@ public class EaseSineIn implements IEaseFunction {
 	// ===========================================================
 
 	public static float getValue(final float pPercentage) {
-		return -FloatMath.cos(pPercentage * MathConstants.PI_HALF) + 1;
+		return (float) (-Math.cos(pPercentage * MathConstants.PI_HALF) + 1);
 	}
 
 	// ===========================================================

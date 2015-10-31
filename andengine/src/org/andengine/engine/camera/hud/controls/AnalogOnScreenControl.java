@@ -8,8 +8,6 @@ import org.andengine.opengl.texture.region.ITextureRegion;
 import org.andengine.opengl.vbo.VertexBufferObjectManager;
 import org.andengine.util.math.MathUtils;
 
-import android.util.FloatMath;
-
 /**
  * (c) 2010 Nicolas Gramlich 
  * (c) 2011 Zynga Inc.
@@ -82,7 +80,9 @@ public class AnalogOnScreenControl extends BaseOnScreenControl implements IClick
 			super.onUpdateControlKnob(pRelativeX, pRelativeY);
 		} else {
 			final float angleRad = MathUtils.atan2(pRelativeY, pRelativeX);
-			super.onUpdateControlKnob(FloatMath.cos(angleRad) * 0.5f, FloatMath.sin(angleRad) * 0.5f);
+			float x = (float) (Math.cos(angleRad) * 0.5f);
+			float y = (float) (Math.sin(angleRad) * 0.5f);
+			super.onUpdateControlKnob(x, y);
 		}
 	}
 

@@ -55,7 +55,7 @@ public class EaseCircularOut implements IEaseFunction {
 
 	public static float getValue(final float pPercentage) {
 		final float t = pPercentage - 1;
-		return FloatMath.sqrt(1 - t * t);
+		return (float) Math.sqrt(1 - t * t);
 	}
 
 	// ===========================================================

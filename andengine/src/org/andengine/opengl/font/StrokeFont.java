@@ -73,7 +73,7 @@ public class StrokeFont extends Font {
 	@Override
 	protected void updateTextBounds(final String pCharacterAsString) {
 		this.mStrokePaint.getTextBounds(pCharacterAsString, 0, 1, this.mTextBounds);
-		final int inset = -(int)FloatMath.floor(this.mStrokeWidth * 0.5f);
+		final int inset = -(int)Math.floor(this.mStrokeWidth * 0.5f);
 		this.mTextBounds.inset(inset, inset);
 	}
 
